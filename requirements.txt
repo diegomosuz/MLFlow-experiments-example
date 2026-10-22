@@ -1,0 +1,6 @@
+# ISTEA | Laboratorio de Minería de Datos | Prof. Diego Mosquera
+# Se recomienda Python 3.11 o 3.12 en un entorno virtual aislado.
+# MLflow 3.x: las API de log_model(name=...) y SQLite se usan en train.py.
+mlflow>=3.7,<4.0
+scikit-learn>=1.6,<2.0
+PyYAML>=6.0,<7.0

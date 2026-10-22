@@ -1,0 +1,93 @@
+# ============================================================================
+# ISTEA | Inteligencia Artificial y Ciencia de Datos
+# Asignatura: Laboratorio de Minería de Datos
+# Profesor: Diego Mosquera
+# Práctica: Experimentación reproducible con Iris, scikit-learn y MLflow
+# ============================================================================
+# Este es el ÚNICO archivo que normalmente debe editar el estudiante para
+# agregar/cambiar algoritmos o sus hiperparámetros. No se duplica train.py.
+
+institucion:
+  nombre: ISTEA
+  carrera: Inteligencia Artificial y Ciencia de Datos
+  asignatura: Laboratorio de Minería de Datos
+  profesor: Diego Mosquera
+
+experimento:
+  # Todos los runs del ejercicio se agrupan bajo este experimento en MLflow.
+  nombre: ISTEA_Laboratorio_Mineria_de_Datos_Iris
+  # SQLite guarda los metadatos; los modelos/artefactos se guardan aparte.
+  base_de_datos: mlflow.db
+  directorio_artefactos: mlartifacts
+
+validacion:
+  # El test (20 %) se separa al inicio y NO se evalúa en esta práctica:
+  # la elección del algoritmo se hace EXCLUSIVAMENTE mediante CV en train.
+  proporcion_test: 0.20
+  semilla: 42
+  numero_folds: 5
+  metrica_principal: f1_macro
+
+# Cada entrada es una CONFIGURACIÓN; entradas con el mismo algoritmo pero
+# diferentes parámetros originan runs distintos de MLflow.
+# Algoritmos disponibles: logistic_regression, decision_tree, random_forest,
+# svm, knn, gaussian_nb, gradient_boosting.
+modelos:
+  regresion_logistica:
+    algoritmo: logistic_regression
+    parametros:
+      C: 1.0
+      max_iter: 2000
+      random_state: 42
+
+  arbol_decision:
+    algoritmo: decision_tree
+    parametros:
+      max_depth: 4
+      random_state: 42
+
+  random_forest_100:
+    algoritmo: random_forest
+    parametros:
+      n_estimators: 100
+      max_depth: null  # 'null' de YAML equivale a None en Python.
+      random_state: 42
+
+  random_forest_300:
+    algoritmo: random_forest
+    parametros:
+      n_estimators: 300
+      max_depth: null
+      random_state: 42
+
+  svm_lineal:
+    algoritmo: svm
+    parametros:
+      kernel: linear
+      C: 1.0
+
+  svm_rbf:
+    algoritmo: svm
+    parametros:
+      kernel: rbf
+      C: 1.0
+      gamma: scale
+
+  knn_5_vecinos:
+    algoritmo: knn
+    parametros:
+      n_neighbors: 5
+      weights: uniform
+
+  naive_bayes_gaussiano:
+    algoritmo: gaussian_nb
+    parametros:
+      var_smoothing: 1.0e-9
+
+  gradient_boosting:
+    algoritmo: gradient_boosting
+    parametros:
+      n_estimators: 100
+      learning_rate: 0.1
+      max_depth: 3
+      random_state: 42
